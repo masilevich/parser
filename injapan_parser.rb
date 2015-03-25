@@ -3,6 +3,7 @@ require 'net/http'
 require 'net/smtp'
 require 'open-uri'
 require 'nokogiri'
+require 'yaml'
 
 SEND_TO = 'l.masilevich@gmail.com'
 
