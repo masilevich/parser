@@ -30,7 +30,7 @@ def parse(query)
 
   new_elements = current_elements - previous_elements
 
-  send_message("New results for query: #{query}", ap new_elements) if new_elements.any?
+  send_message("New results for query: #{query}", ap(new_elements)) if new_elements.any?
 
   new_elements.each { |element| results_file.puts(element) }
   results_file.close
