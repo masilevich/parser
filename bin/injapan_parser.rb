@@ -29,7 +29,7 @@ def parse(query)
 
   new_elements = current_elements - previous_elements
 
-  send_message("Появились новые результаты для запроса #{query}", new_elements)
+  send_message("New results for query: #{query}", new_elements) if new_elements.any?
 
   new_elements.each { |element| results_file.puts(element) }
   results_file.close
@@ -39,10 +39,10 @@ end
 def full_message(subject, msg)
 <<MESSAGE_END
 From: mlvnotifier <mlvnotifier@gmail.com>
-To: Developers
+To: #{SEND_TO}
 MIME-Version: 1.0
 Content-type: text/html
-Subject: subject
+Subject: #{subject}
  
 <br/>
 #{msg}<br/>
@@ -52,7 +52,7 @@ MESSAGE_END
 end
 
 def send_message(subject, msg)
-  smtp = Net::SMTP.new 'smtp.gmail.com', 587
+  smtp = Net::SMTP.new 'smtp.gmail.com', 25
   smtp.enable_starttls
   smtp.start("gmail.com", "mlvnotifier@gmail.com", '5Lipp7BDIk', :login) do |smtp|
     smtp.send_message(full_message(subject, msg), "mlvnotifier@gmail.com", SEND_TO)
