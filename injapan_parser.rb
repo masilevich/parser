@@ -3,7 +3,7 @@ require 'net/http'
 require 'net/smtp'
 require 'open-uri'
 require 'nokogiri'
-require 'yaml'
+require 'awesome_print'
 
 SEND_TO = 'l.masilevich@gmail.com'
 
@@ -30,7 +30,7 @@ def parse(query)
 
   new_elements = current_elements - previous_elements
 
-  send_message("New results for query: #{query}", y(new_elements)) if new_elements.any?
+  send_message("New results for query: #{query}", ap new_elements) if new_elements.any?
 
   new_elements.each { |element| results_file.puts(element) }
   results_file.close
