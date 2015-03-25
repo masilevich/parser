@@ -3,7 +3,7 @@ require 'net/http'
 require 'net/smtp'
 require 'open-uri'
 require 'nokogiri'
-require 'awesome_print'
+require 'json'
 
 SEND_TO = 'l.masilevich@gmail.com'
 
@@ -30,7 +30,7 @@ def parse(query)
 
   new_elements = current_elements - previous_elements
 
-  send_message("New results for query: #{query}", new_elements) if new_elements.any?
+  send_message("New results for query: #{query}", JSON.pretty_generate(new_elements)) if new_elements.any?
 
   new_elements.each { |element| results_file.puts(element) }
   results_file.close
@@ -46,7 +46,7 @@ Content-type: text/html
 Subject: #{subject}
  
 <br/>
-#{ap(msg)}<br/>
+#{msg}<br/>
 <br/>
  
 MESSAGE_END
