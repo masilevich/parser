@@ -9,7 +9,7 @@ SEND_TO = 'l.masilevich@gmail.com'
 
 def parse(query) 
 
-  results_array_file = "#{query}.txt"
+  results_array_file = "tmp/#{query}.txt"
 
   previous_elements =[]
 
