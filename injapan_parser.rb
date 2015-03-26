@@ -8,6 +8,20 @@ SEND_TO = 'l.masilevich@gmail.com'
 
 def parse(query) 
 
+  out_file = File.new("tmp/out.txt", "a")
+  out_file.puts("write your stuff here")
+  out_file.close
+
+
+  out_file = File.open("tmp/out.txt", "r")
+  if File.exist?("tmp/out.txt")
+    puts "File exist"
+    puts "File content: #{out_file.read}"
+    out_file.close
+  else
+    puts "File not exist"
+  end
+
   results_array_file = "tmp/#{query}.txt"
 
   previous_keys = []
@@ -32,8 +46,8 @@ def parse(query)
 
   new_keys = current_keys - previous_keys
 
-  send_message("New results for query: #{query}", 
-    hash_to_html_list(new_keys, current_hash)) if new_keys.any?
+  #send_message("New results for query: #{query}", 
+  #  hash_to_html_list(new_keys, current_hash)) if new_keys.any?
 
   new_keys.each { |key| results_file.puts(key) }
   results_file.close
