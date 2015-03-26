@@ -31,8 +31,6 @@ def parse(query)
     previous_keys << line.chomp
   end
 
-  puts previous_keys
-
   url = "https://injapan.ru/search/do.html?query=#{query}"
   html = open(url)
   doc = Nokogiri::HTML(html)
@@ -87,6 +85,6 @@ end
 puts "Start scanning at #{Time.now}"
 
 parse('stella+C2000S')
-parse('stella+1000S')
+#parse('stella+1000S')
 
 puts "Complete scanning at #{Time.now}"
