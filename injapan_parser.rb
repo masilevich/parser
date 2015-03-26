@@ -3,7 +3,6 @@ require 'net/http'
 require 'net/smtp'
 require 'open-uri'
 require 'nokogiri'
-require 'json'
 
 SEND_TO = 'l.masilevich@gmail.com'
 
@@ -11,30 +10,41 @@ def parse(query)
 
   results_array_file = "tmp/#{query}.txt"
 
-  previous_elements =[]
+  previous_keys = []
 
   results_file = File.open(results_array_file, "a+")
   results_file.each_line do |line|
-    previous_elements << line.chomp
+    previous_keys << line.chomp
   end
 
   url = "https://injapan.ru/search/do.html?query=#{query}"
   html = open(url)
   doc = Nokogiri::HTML(html)
   
-  current_elements = []
-  doc.xpath('//div[@id="content"]/div/div/div/div/a/@href').each do |node|
-    current_elements << "https://injapan.ru#{node.text}"
+  current_keys = []
+  current_hash = Hash.new
+  doc.xpath('//div[@id="content"]/div/div/div/div/div/a').each do |node|
+    current_keys << node[:href]
+    current_hash[node[:href]] = node[:title]
   end
-  current_elements.uniq!
 
-  new_elements = current_elements - previous_elements
+  new_keys = current_keys - previous_keys
 
-  send_message("New results for query: #{query}", new_elements) if new_elements.any?
+  send_message("New results for query: #{query}", 
+    hash_to_html_list(new_keys, current_hash))) if new_keys.any?
 
-  new_elements.each { |element| results_file.puts(element) }
+  new_keys.each { |key| results_file.puts(key) }
   results_file.close
 
+end
+
+def hash_to_html_list(keys_array, hash)
+  out = "<ul>\n"
+  keys_array.each do |key|
+    out += "<li><strong>#{hash[key]}:</strong>"
+    out += " <span>https://injapan.ru#{key}</span></li>\n"
+  end
+  out += "</ul>\n"
 end
 
 def full_message(subject, msg)
@@ -45,9 +55,7 @@ MIME-Version: 1.0
 Content-type: text/html
 Subject: #{subject}
  
-<br/>
-#{msg}<br/>
-<br/>
+#{msg}
  
 MESSAGE_END
 end
