@@ -8,20 +8,6 @@ SEND_TO = 'l.masilevich@gmail.com'
 
 def parse(query) 
 
-  out_file = File.new("tmp/out.txt", "a")
-  out_file.puts("write your stuff here")
-  out_file.close
-
-
-  out_file = File.open("tmp/out.txt", "r")
-  if File.exist?("tmp/out.txt")
-    puts "File exist"
-    puts "File content: #{out_file.read}"
-    out_file.close
-  else
-    puts "File not exist"
-  end
-
   results_array_file = "tmp/#{query}.txt"
 
   previous_keys = []
