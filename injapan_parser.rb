@@ -17,6 +17,8 @@ def parse(query)
     previous_keys << line.chomp
   end
 
+  puts previous_keys
+
   url = "https://injapan.ru/search/do.html?query=#{query}"
   html = open(url)
   doc = Nokogiri::HTML(html)
