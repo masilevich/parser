@@ -31,7 +31,7 @@ def parse(query)
   new_keys = current_keys - previous_keys
 
   send_message("New results for query: #{query}", 
-    hash_to_html_list(new_keys, current_hash))) if new_keys.any?
+    hash_to_html_list(new_keys, current_hash)) if new_keys.any?
 
   new_keys.each { |key| results_file.puts(key) }
   results_file.close
