@@ -14,7 +14,7 @@ def parse(url)
   new_elements = Hash.new
   doc.xpath('//table[@id="itemtable"]/tbody/tr/td/a').each do |node|
     unless $redis.sismember(url,node[:href])
-       new_elements["https://injapan.ru#{node[:href]}"] = node.text()
+       new_elements[node[:href]] = node.text()
        $redis.sadd(url, node[:href])
     end
   end
