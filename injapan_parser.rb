@@ -3,45 +3,36 @@ require 'net/http'
 require 'net/smtp'
 require 'open-uri'
 require 'nokogiri'
+require 'redis'
 
 SEND_TO = 'l.masilevich@gmail.com'
 
 def parse(query) 
 
-  results_array_file = "tmp/#{query}.txt"
-
-  previous_keys = []
-
-  results_file = File.open(results_array_file, "a+")
-  results_file.each_line do |line|
-    previous_keys << line.chomp
-  end
+  uri = URI.parse(ENV["REDISCLOUD_URL"])
+  $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
   url = "https://injapan.ru/search/do.html?query=#{query}"
   html = open(url)
   doc = Nokogiri::HTML(html)
   
-  current_keys = []
-  current_hash = Hash.new
+  new_elements = Hash.new
   doc.xpath('//div[@id="content"]/div/div/div/div/div/a').each do |node|
-    current_keys << node[:href]
-    current_hash[node[:href]] = node[:title]
+    unless $redis.ismember(query,node[:href])
+       new_elements[node[:href]] = node[:title]
+       $redis.sadd(query, node[:href])
+    end
   end
 
-  new_keys = current_keys - previous_keys
-
-  #send_message("New results for query: #{query}", 
-  #  hash_to_html_list(new_keys, current_hash)) if new_keys.any?
-
-  new_keys.each { |key| results_file.puts(key) }
-  results_file.close
+  send_message("New results for query: #{query}", 
+    hash_to_html_list(new_elements)) if new_elements.any?
 
 end
 
-def hash_to_html_list(keys_array, hash)
+def hash_to_html_list(hash)
   out = "<ul>\n"
-  keys_array.each do |key|
-    out += "<li><strong>#{hash[key]}:</strong>"
+  hash.each do |key, value|
+    out += "<li><strong>#{value}:</strong>"
     out += " <span>https://injapan.ru#{key}</span></li>\n"
   end
   out += "</ul>\n"
