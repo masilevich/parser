@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 require 'open-uri'
 require 'nokogiri'
-require 'common'
-require 'send_message'
+require_relative 'common'
+require_relative 'send_message'
 
 def parse(url) 
 
