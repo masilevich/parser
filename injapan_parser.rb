@@ -18,7 +18,7 @@ def parse(query)
   
   new_elements = Hash.new
   doc.xpath('//div[@id="content"]/div/div/div/div/div/a').each do |node|
-    unless $redis.ismember(query,node[:href])
+    unless $redis.sismember(query,node[:href])
        new_elements[node[:href]] = node[:title]
        $redis.sadd(query, node[:href])
     end
