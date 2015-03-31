@@ -13,13 +13,13 @@ def parse(url)
   
   new_elements = Hash.new
   doc.xpath('//div[@id="content"]/div/div/div/div/div/a').each do |node|
-    unless $redis.sismember(query,node[:href])
+    unless $redis.sismember(url,node[:href])
        new_elements["https://injapan.ru#{node[:href]}"] = node[:title]
-       $redis.sadd(query, node[:href])
+       $redis.sadd(url, node[:href])
     end
   end
 
-  send_message("New results for query: #{query}", 
+  send_message("New results for url: #{url}", 
     hash_to_html_list(new_elements)) if new_elements.any?
 
 end
