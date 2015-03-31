@@ -26,3 +26,4 @@ end
 
 parse('https://injapan.ru/search/do.html?query=stella+C2000S')
 parse('https://injapan.ru/search/do.html?query=stella+1000S')
+parse('https://injapan.ru/search/do.html?query=S707SULT')
