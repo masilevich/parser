@@ -62,6 +62,6 @@ end
 puts "Start scanning at #{Time.now}"
 
 parse('stella+C2000S')
-#parse('stella+1000S')
+parse('stella+1000S')
 
 puts "Complete scanning at #{Time.now}"
