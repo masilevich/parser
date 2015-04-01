@@ -32,3 +32,5 @@ parse(url: 'https://injapan.ru/search/do.html?query=24mm+f%2F2.8D', product: '24
 parse(url: 'https://injapan.ru/search/do.html?query=28mm+f%2F2.8D', product: '28mm f/2.8D', send_to: "4udo.v.kedax@gmail.com")
 parse(url: 'https://injapan.ru/search/do.html?query=18-200mm+F%2F3.5-6.3+XR+LD', product: '18-200mm F/3.5-6.3 XR LD', send_to: "4udo.v.kedax@gmail.com")
 parse(url: 'https://injapan.ru/search/do.html?query=SP+17-50+mm+f%2F2.8+XR+LD', product: 'SP 17-50 mm f/2.8 XR LD', send_to: "4udo.v.kedax@gmail.com")
+parse(url: 'https://injapan.ru/search/do.html?query=10-20mm+F4-5.6+EX+DC+HSM', product: 'Sigma 10-20mm F4-5.6 EX DC HSM', send_to: "4udo.v.kedax@gmail.com")
+parse(url: 'https://injapan.ru/search/do.html?query=SP+AF10-24mm+F%2F3.5-4.5+LD', product: 'SP AF10-24mm F/3.5-4.5 LD', send_to: "4udo.v.kedax@gmail.com")
