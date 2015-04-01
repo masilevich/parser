@@ -25,7 +25,7 @@ def parse(options)
 
 end
 
-parse(url: 'https://injapan.ru/search/do.html?query=ステラ+C2000S', product: 'stella c2000s')
+parse(url: 'https://injapan.ru/search/do.html?query=stella+C2000S', product: 'stella c2000s')
 parse(url: 'https://injapan.ru/search/do.html?query=stella+1000S', product: 'stella 1000s')
 parse(url: 'https://injapan.ru/search/do.html?query=S707SULT', product: 'S707SULT')
 parse(url: 'https://injapan.ru/search/do.html?query=dxtc-bcx74', product: 'dxtc-bcx74')
