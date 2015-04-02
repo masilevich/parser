@@ -8,7 +8,7 @@ def parse(options)
 
   $redis = init_redis
 
-  html = open(URI.parse(options[:url].to_s))
+  html = open(URI.encode(options[:url]))
   doc = Nokogiri::HTML(html)
   doc.encoding = 'utf-8'
   
