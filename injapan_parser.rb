@@ -8,7 +8,7 @@ def parse(options)
 
   $redis = init_redis
 
-  html = open(options[:url])
+  html = open(URI.parse(options[:url].to_s))
   doc = Nokogiri::HTML(html)
   doc.encoding = 'utf-8'
   
@@ -25,8 +25,8 @@ def parse(options)
 
 end
 
-parse(url: 'https://injapan.ru/search/do.html?query=%E3%82%B9%E3%83%86%E3%83%A9%2BC2000S', product: 'stella c2000s')
-parse(url: 'https://injapan.ru/search/do.html?query=%E3%82%B9%E3%83%86%E3%83%A9%2B1000s', product: 'stella 1000s')
+parse(url: 'https://injapan.ru/search/do.html?query=ステラ+C2000S', product: 'stella c2000s')
+parse(url: 'https://injapan.ru/search/do.html?query=ステラ+1000S', product: 'stella 1000s')
 parse(url: 'https://injapan.ru/search/do.html?query=S707SULT', product: 'S707SULT')
 parse(url: 'https://injapan.ru/search/do.html?query=dxtc-bcx74', product: 'dxtc-bcx74')
 parse(url: 'https://injapan.ru/search/do.html?query=24mm+f%2F2.8D', product: '24mm f/2.8D', send_to: "4udo.v.kedax@gmail.com")
