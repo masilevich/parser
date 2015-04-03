@@ -25,4 +25,5 @@ def send_message(options = {})
   smtp.start("gmail.com", ENV['MAIL_LOGIN'], ENV['MAIL_PASSWORD'], :login) do |smtp|
     smtp.send_message(full_message(to, options[:subject], options[:msg]), ENV['MAIL_LOGIN'], to)
   end
+  puts 'message sended'
 end

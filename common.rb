@@ -3,6 +3,7 @@
 require 'redis'
 require 'open-uri'
 require 'nokogiri'
+require_relative 'send_message'
 
 def init_redis
 	uri = URI.parse(ENV["REDISCLOUD_URL"])
@@ -34,7 +35,10 @@ def parse(options)
     end
   end
 
-  send_message(subject: "New results for: #{options[:product]}", 
-    msg: hash_to_html_list(new_elements), to: options[:send_to]) if new_elements.any?
+  if new_elements.any?
+    puts 'send_message'
+    send_message(subject: "New results for: #{options[:product]}", 
+      msg: hash_to_html_list(new_elements), to: options[:send_to]) 
+  end
 
 end
