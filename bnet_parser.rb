@@ -12,4 +12,3 @@ end
 parse_bnet(product: 'stella c2000s new', url: 'http://b-net.tackleberry.co.jp/ec/stk_new/stk_list.cfm?step=ctgry&select=all&word=10%83X%83e%83%89C2000S&search1.x=7&search1.y=12&search1=%8C%9F%8D%F5')
 parse_bnet(product: 'S707SULT new', url: 'http://b-net.tackleberry.co.jp/ec/stk_new/stk_list.cfm?step=ctgry&select=all&word=10%83X%83e%83%89C2000S&search1.x=7&search1.y=12&search1=%8C%9F%8D%F5')
 parse_bnet(product: 'S707SULT used', url: 'http://b-net.tackleberry.co.jp/ec/stk/stk_list.cfm?step=ctgry&select=all&word=s707sult&search1.x=36&search1.y=4&search1=%8C%9F%8D%F5')
-parse_bnet(product: 'dxtc-bcx74', url: 'http://b-net.tackleberry.co.jp/ec/stk/stk_list.cfm?step=ctgry&select=all&word=bcx74&search1.x=23&search1.y=9&search1=%8C%9F%8D%F5')
