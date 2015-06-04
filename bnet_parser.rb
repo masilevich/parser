@@ -9,5 +9,4 @@ def parse_bnet(options)
   end
 end
 
-parse_bnet(product: 'stella c2000s new', url: 'http://b-net.tackleberry.co.jp/ec/stk_new/stk_list.cfm?step=ctgry&select=all&word=10%83X%83e%83%89C2000S&search1.x=7&search1.y=12&search1=%8C%9F%8D%F5')
 parse_bnet(product: 'S707SULT new', url: 'http://b-net.tackleberry.co.jp/ec/stk_new/stk_list.cfm?step=ctgry&select=all&word=10%83X%83e%83%89C2000S&search1.x=7&search1.y=12&search1=%8C%9F%8D%F5')
